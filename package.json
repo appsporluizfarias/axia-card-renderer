@@ -1,0 +1,12 @@
+{
+  "name": "axia-card-renderer",
+  "version": "1.0.0",
+  "description": "Renderizador de cards Instagram para Axia Health",
+  "dependencies": {
+    "@sparticuz/chromium": "^123.0.0",
+    "puppeteer-core": "^22.0.0"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}
