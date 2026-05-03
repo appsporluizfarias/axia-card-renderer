@@ -1,19 +1,19 @@
 import satori from 'satori';
 import sharp from 'sharp';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, '..');
 
 const LOGO_URL = 'https://axia.apexio.com.br/logo-header.png';
 
-async function getFonts() {
-  // Satori só aceita TTF — usando GitHub como CDN de fontes
-  const [regular, bold, black] = await Promise.all([
-    fetch('https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf').then(r => r.arrayBuffer()),
-    fetch('https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf').then(r => r.arrayBuffer()),
-    fetch('https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf').then(r => r.arrayBuffer()),
-  ]);
+function getFonts() {
   return [
-    { name: 'Montserrat', data: regular, weight: 400, style: 'normal' },
-    { name: 'Montserrat', data: bold,    weight: 700, style: 'normal' },
-    { name: 'Montserrat', data: black,   weight: 900, style: 'normal' },
+    { name: 'Montserrat', data: readFileSync(join(ROOT, 'Montserrat-Regular.ttf')), weight: 400, style: 'normal' },
+    { name: 'Montserrat', data: readFileSync(join(ROOT, 'Montserrat-Bold.ttf')),    weight: 700, style: 'normal' },
+    { name: 'Montserrat', data: readFileSync(join(ROOT, 'Montserrat-Black.ttf')),   weight: 900, style: 'normal' },
   ];
 }
 
@@ -138,7 +138,8 @@ export default async function handler(req, res) {
   } = req.body;
 
   try {
-    const [fonts, logoDataUrl] = await Promise.all([getFonts(), getLogoDataUrl()]);
+    const fonts = getFonts();
+    const logoDataUrl = await getLogoDataUrl();
     const templateFn = TEMPLATES[template.toUpperCase()] || templateA;
     const element = templateFn({ headline, subtexto, cta, logoDataUrl });
 
