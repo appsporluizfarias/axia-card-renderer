@@ -2,6 +2,7 @@
   "name": "axia-card-renderer",
   "version": "1.0.0",
   "description": "Renderizador de cards Instagram para Axia Health",
+  "type": "module",
   "dependencies": {
     "satori": "^0.10.13",
     "sharp": "^0.33.3"
