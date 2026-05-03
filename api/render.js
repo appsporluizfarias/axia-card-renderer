@@ -4,10 +4,11 @@ import sharp from 'sharp';
 const LOGO_URL = 'https://axia.apexio.com.br/logo-header.png';
 
 async function getFonts() {
+  // URLs diretas dos arquivos de fonte do Google Fonts CDN
   const [regular, bold, black] = await Promise.all([
-    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff').then(r => r.arrayBuffer()),
-    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w5aXo.woff').then(r => r.arrayBuffer()),
-    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr6Ew5aXo.woff').then(r => r.arrayBuffer()),
+    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2').then(r => r.arrayBuffer()),
+    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w5aXo.woff2').then(r => r.arrayBuffer()),
+    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr6Ew5aXo.woff2').then(r => r.arrayBuffer()),
   ]);
   return [
     { name: 'Montserrat', data: regular, weight: 400, style: 'normal' },
@@ -27,14 +28,7 @@ function templateA({ headline, subtexto, cta, logoDataUrl }) {
   return {
     type: 'div',
     props: {
-      style: {
-        width: 1080, height: 1080,
-        background: '#000000',
-        fontFamily: 'Montserrat',
-        display: 'flex', flexDirection: 'column',
-        padding: '72px',
-        position: 'relative',
-      },
+      style: { width: 1080, height: 1080, background: '#000000', fontFamily: 'Montserrat', display: 'flex', flexDirection: 'column', padding: '72px', position: 'relative' },
       children: [
         { type: 'div', props: { style: { position: 'absolute', top: -150, right: -150, width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,188,212,0.2) 0%, transparent 70%)' } } },
         { type: 'div', props: { style: { position: 'absolute', bottom: -200, left: -100, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(26,42,108,0.5) 0%, transparent 70%)' } } },
@@ -44,7 +38,7 @@ function templateA({ headline, subtexto, cta, logoDataUrl }) {
           props: {
             style: { display: 'flex', flexDirection: 'column' },
             children: [
-              { type: 'div', props: { style: { color: '#00bcd4', fontSize: 22, fontWeight: 700, letterSpacing: 4, marginBottom: 28 }, children: 'GESTÃO DE CLÍNICAS' } },
+              { type: 'div', props: { style: { color: '#00bcd4', fontSize: 22, fontWeight: 700, letterSpacing: 4, marginBottom: 28 }, children: 'GESTAO DE CLINICAS' } },
               { type: 'div', props: { style: { color: '#ffffff', fontSize: 86, fontWeight: 900, lineHeight: 1.0, marginBottom: 36 }, children: headline } },
               { type: 'div', props: { style: { color: 'rgba(255,255,255,0.65)', fontSize: 30, lineHeight: 1.5, marginBottom: 56, maxWidth: 820 }, children: subtexto } },
               { type: 'div', props: { style: { background: 'linear-gradient(135deg, #00bcd4, #1a2a6c)', color: '#fff', fontSize: 26, fontWeight: 700, padding: '20px 48px', borderRadius: 60, alignSelf: 'flex-start' }, children: cta } },
@@ -75,7 +69,7 @@ function templateB({ headline, subtexto, cta, logoDataUrl }) {
                 props: {
                   style: { display: 'flex', flexDirection: 'column' },
                   children: [
-                    { type: 'div', props: { style: { display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }, children: [{ type: 'div', props: { style: { width: 12, height: 12, borderRadius: '50%', background: '#00bcd4' } } }, { type: 'div', props: { style: { color: '#00bcd4', fontSize: 20, fontWeight: 700, letterSpacing: 3 }, children: 'DICA PARA CLÍNICAS' } }] } },
+                    { type: 'div', props: { style: { display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }, children: [{ type: 'div', props: { style: { width: 12, height: 12, borderRadius: '50%', background: '#00bcd4' } } }, { type: 'div', props: { style: { color: '#00bcd4', fontSize: 20, fontWeight: 700, letterSpacing: 3 }, children: 'DICA PARA CLINICAS' } }] } },
                     { type: 'div', props: { style: { color: '#fff', fontSize: 78, fontWeight: 900, lineHeight: 1.05, marginBottom: 36 }, children: headline } },
                     { type: 'div', props: { style: { color: 'rgba(255,255,255,0.6)', fontSize: 28, lineHeight: 1.6, marginBottom: 56, maxWidth: 780 }, children: subtexto } },
                     { type: 'div', props: { style: { border: '2px solid #00bcd4', color: '#00bcd4', fontSize: 24, fontWeight: 700, padding: '18px 44px', borderRadius: 8, alignSelf: 'flex-start' }, children: cta } },
@@ -137,8 +131,8 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const {
-    headline = 'Sua clínica mais organizada',
-    subtexto = 'Gerencie agendamentos, pacientes e finanças em um só lugar.',
+    headline = 'Sua clinica mais organizada',
+    subtexto = 'Gerencie agendamentos, pacientes e financas em um so lugar.',
     cta = 'Saiba mais',
     template = 'A',
   } = req.body;
