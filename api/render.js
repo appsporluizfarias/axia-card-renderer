@@ -4,11 +4,11 @@ import sharp from 'sharp';
 const LOGO_URL = 'https://axia.apexio.com.br/logo-header.png';
 
 async function getFonts() {
-  // URLs diretas dos arquivos de fonte do Google Fonts CDN
+  // Satori só aceita TTF — usando GitHub como CDN de fontes
   const [regular, bold, black] = await Promise.all([
-    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2').then(r => r.arrayBuffer()),
-    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w5aXo.woff2').then(r => r.arrayBuffer()),
-    fetch('https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr6Ew5aXo.woff2').then(r => r.arrayBuffer()),
+    fetch('https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf').then(r => r.arrayBuffer()),
+    fetch('https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf').then(r => r.arrayBuffer()),
+    fetch('https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf').then(r => r.arrayBuffer()),
   ]);
   return [
     { name: 'Montserrat', data: regular, weight: 400, style: 'normal' },
