@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Renderizador de cards Instagram para Axia Health",
   "dependencies": {
-    "@sparticuz/chromium": "131.0.1",
-    "puppeteer-core": "23.9.0"
+    "satori": "^0.10.13",
+    "sharp": "^0.33.3"
   },
   "engines": {
     "node": "20.x"
